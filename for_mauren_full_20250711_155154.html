@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Mauren</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom right, #ffc1cc, #ffe4ec);
+      overflow-x: hidden;
+    }
+    .password-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffe4ec;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      text-align: center;
+    }
+    .password-screen h2 {
+      font-size: 1.5em;
+      color: #cc3366;
+      margin-bottom: 20px;
+    }
+    .password-screen .input-container {
+      position: relative;
+    }
+    .password-screen input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+    }
+    .password-screen .toggle-visibility {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+    .password-screen button {
+      margin-top: 10px;
+      background: pink;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .error-message {
+      margin-top: 10px;
+      color: crimson;
+      font-weight: bold;
+    }
+    .slide {
+      display: none;
+      padding: 40px 20px;
+      text-align: center;
+      min-height: 100vh;
+    }
+    .active {
+      display: block;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .btn {
+      background: #fff0f5;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    }
+    .love {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Basic_heart.svg/2048px-Basic_heart.svg.png') no-repeat center;
+      background-size: contain;
+      animation: floatLove 4s infinite;
+      pointer-events: none;
+      opacity: 0.6;
+      z-index: 999;
+    }
+    @keyframes floatLove {
+      0% { transform: translateY(0); opacity: 0.7; }
+      50% { transform: translateY(-100px); opacity: 0.5; }
+      100% { transform: translateY(-200px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="password-screen" id="passwordScreen">
+  <h2>Heyy baby, you gotta whisper the magic words first 😘</h2>
+  <div class="input-container">
+    <input type="password" id="passwordInput" placeholder="Tell me the secret...">
+    <span class="toggle-visibility" onclick="togglePassword()">👁️</span>
+  </div>
+  <button onclick="checkPassword()">Enter</button>
+  <div class="error-message" id="errorMsg"></div>
+</div>
+
+<!-- SLIDE 1: Envelope -->
+<div class="slide" id="slide1">
+  <h1>She’s My Little Girl</h1>
+  <img src="YOUR-ENVELOPE-IMAGE.jpg" class="envelope-img" onclick="openLetter()">
+  <div class="letter-container" id="letterContainer">
+    <div class="side-photos">
+      <div>
+        <img src="mauren1.jpg">
+        <img src="mauren2.jpg">
+        <img src="mauren3.jpg">
+      </div>
+      <div>
+        <img src="mauren4.jpg">
+        <img src="mauren5.jpg">
+        <img src="mauren6.jpg">
+      </div>
+    </div>
+    <img src="kertas-depan.jpg" class="letter-image" id="letterImage" onclick="flipLetter()">
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="nextSlide(1)">Next</button>
+  </div>
+</div>
+
+<!-- SLIDE 2: Favorites -->
+<div class="slide" id="slide2">
+  <h2>About Her Favorites</h2>
+  <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <img src="foto1.jpg" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover; animation: float 4s ease-in-out infinite;">
+    <img src="foto2.jpg" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover; animation: float 4s ease-in-out infinite;">
+    <img src="foto3.jpg" style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover; animation: float 4s ease-in-out infinite;">
+  </div>
+  <div style="background: white; padding: 20px; border-radius: 20px; max-width: 400px; margin: 0 auto; text-align: left; font-size: 1.1em; line-height: 1.6;">
+    <p><strong>🍱 Food:</strong> Dimsum! Bahkan pernah barter sama temennya mamah 🤭</p>
+    <p><strong>🥛 Drink:</strong> Susu Cimory Marie Regal, favorit abadi!</p>
+    <p><strong>🍫 Snack:</strong> Coklat. Dia bisa makan tanpa minum air!</p>
+    <p><strong>👟 Fun Fact:</strong> Dia jago main game (tapi sering kalah wkwk)</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="prevSlide(2)">Back</button>
+    <button class="btn" onclick="nextSlide(2)">Next</button>
+  </div>
+</div>
+
+<!-- SLIDE 3: Bucin -->
+<div class="slide" id="slide3">
+  <h2>Bucin Words</h2>
+  <div id="bucinText" style="width: 80%; margin: auto; font-size: 1.2em; white-space: pre-wrap; text-align: center; border-right: 2px solid #ff69b4; min-height: 140px;"></div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="prevSlide(3)">Back</button>
+    <button class="btn" onclick="nextSlide(3)">Next</button>
+  </div>
+</div>
+
+<!-- SLIDE 4: Semangat Kuliah -->
+<div class="slide" id="slide4">
+  <h2>You're Going to Rock Malang 🎓</h2>
+  <div style="background: white; padding: 20px; border-radius: 20px; max-width: 450px; margin: auto; text-align: left; font-size: 1.1em; line-height: 1.6;">
+    <p>College won’t know what hit them 😎 Kamu punya semua yang dibutuhin buat bersinar.</p>
+    <p>Semangat yaa, jangan lupa makan dan tidur cukup! 🥹✨</p>
+    <p>When things get hard, remember... I'm always rooting for you 💖</p>
+    <p>Every step you take in Malang, aku yakin itu langkah yang kuat 💪</p>
+    <p>Study hard, rest well, and never forget how amazing you are 💫</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="prevSlide(4)">Back</button>
+    <button class="btn" onclick="nextSlide(4)">Next</button>
+  </div>
+</div>
+
+<!-- SLIDE 5: I Love You -->
+<div class="slide" id="slide5">
+  <h2>I Love You</h2>
+  <p style="padding: 20px; font-size: 1.2em;">
+    I love you not just because of what you are,<br>
+    but because of who I am when I’m with you.<br>
+    You are my peace in chaos, my softness in a hard world,<br>
+    and my favorite hello.
+  </p>
+  <div class="nav-buttons">
+    <button class="btn" onclick="prevSlide(5)">Back</button>
+    <button class="btn" onclick="nextSlide(5)">Next</button>
+  </div>
+</div>
+
+<!-- SLIDE 6: Question -->
+<div class="slide" id="slide6">
+  <h2>Last Question, Baby 💌</h2>
+  <p style="font-size: 1.1em; padding: 10px 30px;">How do you imagine us in the next level? Gimme your dream version of us 💭</p>
+  <form action="https://formspree.io/f/xjkrnjbl" method="POST" onsubmit="return showSentMessage(event)">
+    <textarea name="message" required placeholder="Type your answer here..." 
+      style="width: 90%; height: 120px; border-radius: 10px; padding: 10px; font-size: 1em; border: 1px solid pink;"></textarea>
+    <br>
+    <button type="submit" class="btn" style="margin-top: 15px;">Send</button>
+  </form>
+  <div id="sentMsg" style="display:none; color: hotpink; margin-top: 15px; font-weight: bold;">
+    Sent! Now I can read your heart ❤️
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="prevSlide(6)">Back</button>
+  </div>
+</div>
+
+<audio id="bgMusic" autoplay loop>
+  <source src="YOUR-MUSIC-LINK.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
+<script>
+  const correctPassword = "I LOVE YOU ANZZ";
+  let attempts = 0;
+  const funnyResponses = [
+    "Ayoo coba lagii piyik!",
+    "Payah lu piyik, coba lagi!",
+    "Nyerah?",
+    "Masih salah nih, huhu 😭",
+    "Duh capek ya ngetiknya?",
+    "Oke kamu ngambek ya? 😝",
+    "Udah ah, min males bacain password salah terus!"
+  ];
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    const errorMsg = document.getElementById("errorMsg");
+    if (input.trim().toUpperCase() === correctPassword) {
+      document.getElementById("passwordScreen").style.display = "none";
+      document.getElementById("slide1").classList.add("active");
+    } else {
+      errorMsg.textContent = funnyResponses[Math.min(attempts, funnyResponses.length - 1)];
+      attempts++;
+    }
+  }
+  function togglePassword() {
+    const input = document.getElementById("passwordInput");
+    input.type = input.type === "password" ? "text" : "password";
+  }
+  function nextSlide(n) {
+    document.getElementById(`slide${n}`).classList.remove("active");
+    document.getElementById(`slide${n+1}`).classList.add("active");
+  }
+  function prevSlide(n) {
+    document.getElementById(`slide${n}`).classList.remove("active");
+    document.getElementById(`slide${n-1}`).classList.add("active");
+  }
+  function openLetter() {
+    document.getElementById("letterContainer").style.display = "flex";
+  }
+  let flipped = false;
+  function flipLetter() {
+    const img = document.getElementById("letterImage");
+    if (!flipped) {
+      img.src = "kertas-belakang.jpg";
+      img.classList.add("flipped");
+      flipped = true;
+    } else {
+      img.src = "kertas-depan.jpg";
+      img.classList.remove("flipped");
+      flipped = false;
+    }
+  }
+  // Bucin typing effect
+  const text = "Aku nggak nyesel jatuh cinta sama kamu, Mauren.\nDari semua kemungkinan yang ada di dunia ini, semesta tetep milih kamu buat nemenin aku tumbuh, bareng-bareng.\nKamu bukan cuma rumah, tapi juga cahayaku.";
+  let i = 0;
+  function typeEffect() {
+    if (i < text.length) {
+      document.getElementById("bucinText").textContent += text.charAt(i);
+      i++;
+      setTimeout(typeEffect, 50);
+    }
+  }
+  setTimeout(typeEffect, 1000);
+
+  // Show form message
+  function showSentMessage(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        document.getElementById("sentMsg").style.display = "block";
+        form.reset();
+      } else {
+        alert("Oops, gagal ngirim 🥹. Coba lagi ya sayang.");
+      }
+    });
+    return false;
+  }
+
+  // Floating love effect
+  setInterval(() => {
+    const love = document.createElement("div");
+    love.classList.add("love");
+    love.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(love);
+    setTimeout(() => love.remove(), 4000);
+  }, 500);
+</script>
+
+</body>
+</html>
